@@ -1,0 +1,45 @@
+{
+  "manifest_version": "1.5",
+  "blog_id": 944545,
+  "post_id": 681,
+  "title": "Enchainement à partir d'une défense de la guillotine",
+  "text_direction": "ltr",
+  "duration": 150,
+  "language": "en",
+  "restricted_embed": true,
+  "ogv": {
+    "url": "https://videos.files.wordpress.com/N8iQgdNR/nov-14_fmt1.ogv",
+    "codecs": "theora, vorbis"
+  },
+  "swf": {
+    "url": "https://v0.wordpress.com/player.swf?v=1.04",
+    "version": "10.0.0",
+    "vars": {
+      "guid": "N8iQgdNR",
+      "isDynamicSeeking": "true"
+    },
+    "params": {
+      "wmode": "direct",
+      "seamlesstabbing": "true",
+      "allowfullscreen": "true",
+      "allowscriptaccess": "always",
+      "overstretch": "true"
+    }
+  },
+  "js": {
+    "url": "https://s0.wp.com/wp-content/plugins/video/assets/js/videopress.js",
+    "version": "1.12"
+  },
+  "skin": {
+    "background_color": "#000000",
+    "watermark": "https://s.wp.com/wp-content/plugins/video/assets/i/videopress.png"
+  },
+  "width": 600,
+  "height": 336,
+  "posterframe": "https://videos.files.wordpress.com/N8iQgdNR/nov-14_dvd.original.jpg",
+  "mp4": {
+    "url": "https://videos.files.wordpress.com/N8iQgdNR/nov-14_dvd.mp4",
+    "codecs": "avc1.64001E, mp4a.40.2",
+    "format": "dvd"
+  }
+}
