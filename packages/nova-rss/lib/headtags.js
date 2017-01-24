@@ -1,5 +1,7 @@
-Telescope.headtags.link.push({
+import { getSetting, Headtags } from 'meteor/nova:core';
+
+Headtags.link.push({
   rel: "alternate", 
   type: "application/rss+xml",
-  href: `${Telescope.settings.get("siteUrl")}feed.xml`
+  href: `${getSetting("siteUrl")}feed.xml`
 });

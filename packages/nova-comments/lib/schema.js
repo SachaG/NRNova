@@ -1,21 +1,10 @@
-import Comments from './collection.js';
 import Users from 'meteor/nova:users';
-
-
-// check if user can create a new comment
-const canInsert = user => Users.canDo(user, "comments.new");
-
-// check if user can edit a comment
-const canEdit = Users.canEdit;
-
-// check if user can edit *all* comments
-const canEditAll = user => Users.canDo(user, "comments.edit.all");
 
 /**
  * @summary Comments schema
- * @type {SimpleSchema}
+ * @type {Object}
  */
-Comments.schema = new SimpleSchema({
+const schema = {
   /**
     ID
   */
@@ -23,6 +12,7 @@ Comments.schema = new SimpleSchema({
     type: String,
     optional: true,
     publish: true,
+    viewableBy: ['guests'],
   },
   /**
     The `_id` of the parent comment, if there is one
@@ -31,10 +21,12 @@ Comments.schema = new SimpleSchema({
     type: String,
     // regEx: SimpleSchema.RegEx.Id,
     max: 500,
-    insertableIf: canInsert,
+    viewableBy: ['guests'],
+    insertableBy: ['members'],
     optional: true,
     publish: true,
-    control: "none" // never show this
+    resolveAs: 'parentComment: Comment',
+    hidden: true // never show this
   },
   /**
     The `_id` of the top-level parent comment, if there is one
@@ -43,10 +35,12 @@ Comments.schema = new SimpleSchema({
     type: String,
     // regEx: SimpleSchema.RegEx.Id,
     max: 500,
-    insertableIf: canInsert,
+    viewableBy: ['guests'],
+    insertableBy: ['members'],
     optional: true,
     publish: true,
-    control: "none" // never show this
+    resolveAs: 'topLevelComment: Comment',
+    hidden: true // never show this
   },
   /**
     The timestamp of comment creation
@@ -54,7 +48,11 @@ Comments.schema = new SimpleSchema({
   createdAt: {
     type: Date,
     optional: true,
-    publish: false
+    publish: false,
+    viewableBy: ['admins'],
+    autoValue: (documentOrModifier) => {
+      if (documentOrModifier && !documentOrModifier.$set) return new Date() // if this is an insert, set createdAt to current timestamp
+    }
   },
   /**
     The timestamp of the comment being posted. For now, comments are always created and posted at the same time
@@ -63,6 +61,10 @@ Comments.schema = new SimpleSchema({
     type: Date,
     optional: true,
     publish: true,
+    viewableBy: ['guests'],
+    autoValue: (documentOrModifier) => {
+      if (documentOrModifier && !documentOrModifier.$set) return new Date() // if this is an insert, set createdAt to current timestamp
+    }
   },
   /**
     The comment body (Markdown)
@@ -70,8 +72,9 @@ Comments.schema = new SimpleSchema({
   body: {
     type: String,
     max: 3000,
-    insertableIf: canInsert,
-    editableIf: canEdit,
+    viewableBy: ['guests'],
+    insertableBy: ['members'],
+    editableBy: ['members'],
     publish: true,
     control: "textarea"
   },
@@ -82,6 +85,7 @@ Comments.schema = new SimpleSchema({
     type: String,
     optional: true,
     publish: true,
+    viewableBy: ['guests'],
   },
   /**
     The comment author's name
@@ -90,6 +94,12 @@ Comments.schema = new SimpleSchema({
     type: String,
     optional: true,
     publish: true,
+    viewableBy: ['guests'],
+    autoValue: (documentOrModifier) => {
+      // if userId is changing, change the author name too
+      const userId = documentOrModifier.userId || documentOrModifier.$set && documentOrModifier.$set.userId
+      if (userId) return Users.getDisplayNameById(userId)
+    }
   },
   /**
     Whether the comment is inactive. Inactive comments' scores gets recalculated less often
@@ -98,6 +108,7 @@ Comments.schema = new SimpleSchema({
     type: Boolean,
     optional: true,
     publish: true,
+    viewableBy: ['guests'],
   },
   /**
     The post's `_id`
@@ -106,11 +117,12 @@ Comments.schema = new SimpleSchema({
     type: String,
     optional: true,
     publish: true,
+    viewableBy: ['guests'],
+    insertableBy: ['members'],
     // regEx: SimpleSchema.RegEx.Id,
     max: 500,
-    autoform: {
-      omit: true // never show this
-    }
+    resolveAs: 'post: Post',
+    hidden: true // never show this
   },
   /**
     The comment author's `_id`
@@ -119,47 +131,54 @@ Comments.schema = new SimpleSchema({
     type: String,
     optional: true,
     publish: true,
-    join: {
-      joinAs: "user",
-      collection: () => Meteor.users
-    }
+    viewableBy: ['guests'],
+    insertableBy: ['members'],
+    hidden: true,
+    resolveAs: 'user: User',
+    // join: {
+    //   joinAs: "user",
+    //   collection: () => Users
+    // },
   },
   /**
-    Whether the comment is deleted. Delete comments' content doesn't appear on the site. 
+    Whether the comment is deleted. Delete comments' content doesn't appear on the site.
   */
   isDeleted: {
     type: Boolean,
     optional: true,
     publish: true,
+    viewableBy: ['guests'],
   },
   userIP: {
     type: String,
     optional: true,
-    publish: false
+    publish: false,
+    viewableBy: ['admins'],
   },
   userAgent: {
     type: String,
     optional: true,
-    publish: false
+    publish: false,
+    viewableBy: ['admins'],
   },
   referrer: {
     type: String,
     optional: true,
-    publish: false
+    publish: false,
+    viewableBy: ['admins'],
   }
-});
+};
 
-Comments.attachSchema(Comments.schema);
+export default schema;
 
-if (typeof Telescope.notifications !== "undefined") {
-  Comments.addField({
-    fieldName: 'disableNotifications',
-    fieldSchema: {
-      type: Boolean,
-      optional: true,
-      autoform: {
-        omit: true
-      }
-    }
-  });
-}
+// todo: move to nova:notifications
+// if (typeof Telescope.notifications !== "undefined") {
+//   Comments.addField({
+//     fieldName: 'disableNotifications',
+//     fieldSchema: {
+//       type: Boolean,
+//       optional: true,
+//       hidden: true // never show this
+//     }
+//   });
+// }

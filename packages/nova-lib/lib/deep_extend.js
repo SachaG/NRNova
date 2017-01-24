@@ -1,5 +1,7 @@
+import { Utils } from './utils.js';
+
 // see: http://stackoverflow.com/questions/9399365/deep-extend-like-jquerys-for-nodejs
-Telescope.utils.deepExtend = function () {
+Utils.deepExtend = function () {
   var options, name, src, copy, copyIsArray, clone, target = arguments[0] || {},
       i = 1,
       length = arguments.length,
@@ -45,7 +47,6 @@ Telescope.utils.deepExtend = function () {
             return false;
           }
           var key;
-          for (key in obj) {}
           return key === undefined || hasOwn.call(obj, key);
         }
       };
@@ -77,7 +78,7 @@ Telescope.utils.deepExtend = function () {
               clone = src && jQuery.isPlainObject(src) ? src : {};
             }
             // WARNING: RECURSION
-            target[name] = Telescope.utils.deepExtend(deep, clone, copy);
+            target[name] = Utils.deepExtend(deep, clone, copy);
           } else if (copy !== undefined) {
             target[name] = copy;
           }

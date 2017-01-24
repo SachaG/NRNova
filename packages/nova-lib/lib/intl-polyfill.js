@@ -1,7 +1,15 @@
+/*
+
+intl polyfill. See https://github.com/andyearnshaw/Intl.js/
+
+*/
+
+import { getSetting } from './settings.js';
+
 var areIntlLocalesSupported = require('intl-locales-supported');
 
 var localesMyAppSupports = [
-  Telescope.settings.get("locale", "en")
+  getSetting("locale", "en")
 ];
 
 if (global.Intl) {
