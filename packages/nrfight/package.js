@@ -10,10 +10,10 @@ Package.onUse(function (api) {
     'http',
     'static-html',
 
-    'nova:core@0.26.5-nova',
-    'nova:posts@0.26.5-nova',
-    'nova:users@0.26.5-nova',
-    'nova:comments@0.26.5-nova',
+    'nova:core',
+    'nova:posts',
+    'nova:users',
+    'nova:comments',
   ]);
 
   api.addFiles("lib/head.html", "client");
@@ -22,4 +22,5 @@ Package.onUse(function (api) {
   api.mainModule("lib/client.js", "client");
 
   api.addAssets(["videos.json"], ["server"]);  
+
 });

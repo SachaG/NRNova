@@ -34,7 +34,8 @@ nova:base-components    # default ui components
 nova:base-styles        # default styling
 
 nova:email-templates    # default email templates for notifications
-nova:i18n-en-us         # default language translation
+#nova:i18n-en-us         # default language translation
+nova:i18n-fr-fr         # default language translation
 
 ############ Your Packages ############
 

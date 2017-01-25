@@ -1,11 +1,6 @@
-import PublicationUtils from 'meteor/utilities:smart-publications';
 import Posts from "meteor/nova:posts";
 import Users from "meteor/nova:users";
 import Categories from "meteor/nova:categories";
-
-const canInsert = user => Users.canDo(user, "posts.new");
-const canEdit = Users.canEdit;
-const canEditAll = user => Users.canDo(user, "posts.edit.all");
 
 Posts.addField([
   {
@@ -13,8 +8,9 @@ Posts.addField([
     fieldSchema: {
       type: String,
       optional: true,
-      publish: true,
-      editableIf: canEditAll
+      viewableBy: ['guests'],
+      insertableBy: ['admins'],
+      editableBy: ['admins']
     }
   },
   {
@@ -22,8 +18,9 @@ Posts.addField([
     fieldSchema: {
       type: String,
       optional: true,
-      publish: true,
-      editableIf: canEditAll
+      viewableBy: ['members'],
+      insertableBy: ['admins'],
+      editableBy: ['admins']
     }
   },
   {
@@ -31,12 +28,10 @@ Posts.addField([
     fieldSchema: {
       type: Number,
       optional: true,
-      publish: true,
+      viewableBy: ['guests'],
     }
   }
 ]);
-
-PublicationUtils.addToFields(Posts.publishedFields.list, ["wpId", "videoId"]);
 
 Categories.addField([
   {
@@ -44,7 +39,7 @@ Categories.addField([
     fieldSchema: {
       type: Number,
       optional: true,
-      publish: true,
+      viewableBy: ['guests'],
     }
   }
 ]);

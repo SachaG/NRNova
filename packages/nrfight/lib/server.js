@@ -1,3 +1,5 @@
 import './modules.js';
 
-import './server/import.js';
+import launchImport from './server/import.js';
+
+export { launchImport };

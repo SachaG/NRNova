@@ -1,3 +1,4 @@
+import { newMutation } from 'meteor/nova:core';
 import Posts from 'meteor/nova:posts';
 import Users from 'meteor/nova:users';
 import Categories from 'meteor/nova:categories';
@@ -8,6 +9,8 @@ const Entities = htmlEntities.AllHtmlEntities;
 const entities = new Entities();
 
 const importVideos = limit => {
+
+  const adminUser = Users.findOne({isAdmin: true});
 
   const videosJSON = JSON.parse(Assets.getText("videos.json"));
 
@@ -21,7 +24,7 @@ const importVideos = limit => {
 
   posts.forEach((post, index) => {
 
-    console.log(`// ${index}. importing "${post.title}"`);
+    console.log(`// ${index}. importing "${entities.decode(post.title)}"`);
 
     let postProperties = {
       _id: post.id.toString(),
@@ -29,7 +32,7 @@ const importVideos = limit => {
       slug: post.slug,
       body: post.content,
       postedAt: moment(post.date, "YYYY-MM-DD HH:mm:ss").toDate(),
-      userId: "iJERR3Gn224bafp6Z",
+      userId: adminUser._id,
       categories: []
     };
 
@@ -65,16 +68,24 @@ const importVideos = limit => {
           count: category.post_count 
         };
         console.log(`// Creating new category ${newCategory.name}`);
-        Categories.insert(newCategory);
+        newMutation({
+          collection: Categories, 
+          document: newCategory,
+          currentUser: adminUser,
+          validate: false
+        });
       }
 
       postProperties.categories.push(categoryId);
     
     });
 
-
-    Posts.methods.new(postProperties);
-
+    newMutation({
+      collection: Posts, 
+      document: postProperties,
+      currentUser: adminUser,
+      validate: false
+    });
     // try {
     // } catch(error) {
     //   console.log(error);
@@ -83,10 +94,10 @@ const importVideos = limit => {
 
 }
 
-Meteor.methods({
-  importVideos(limit) {
-    Posts.remove({});
-    Categories.remove({});
-    importVideos(limit);
-  }
-});
+const launchImport = limit => {
+  Posts.remove({});
+  Categories.remove({});
+  importVideos(limit);
+}
+
+export default launchImport;
