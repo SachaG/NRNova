@@ -1,4 +1,4 @@
-import { replaceComponent, Components, withCurrentUser, withDocument, registerComponent } from 'meteor/nova:core';
+import { ModalTrigger, replaceComponent, Components, withCurrentUser, withDocument, registerComponent } from 'meteor/nova:core';
 import React from 'react';
 import Posts from "meteor/nova:posts";
 import NrVideo from './NrVideo.jsx';
@@ -22,7 +22,16 @@ const NrPostsPage = props => {
         
         <Components.PostsItem post={post} currentUser={props.currentUser} />
 
-        <NrVideo post={post}/>
+        {props.currentUser ? <NrVideo post={post}/> : 
+          <div className="video-no-access">
+            <img src={post.thumbnailUrl} />
+            <ModalTrigger title="Sign Up/Log In" size="small" component={<a>Inscrivez-vous</a>}>
+              <Components.UsersAccountForm />
+            </ModalTrigger>
+            pour avoir accès à la vidéo.
+          </div>
+        }
+        
 
         {post.htmlBody ? <div className="posts-page-body" dangerouslySetInnerHTML={htmlBody}></div> : null}
 

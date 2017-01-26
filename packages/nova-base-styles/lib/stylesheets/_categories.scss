@@ -6,3 +6,16 @@
     right: 5px;
   }
 }
+
+.categories-new-button{
+  text-align: center;
+  padding: $vmargin/2;
+  button{
+    display: inline-block;
+  }
+}
+
+.categories-node .categories-node{
+  border-left: 10px $lightest-border solid;
+  padding-left: $hmargin;
+}
