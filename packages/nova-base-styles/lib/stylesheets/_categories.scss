@@ -19,3 +19,9 @@
   border-left: 10px $lightest-border solid;
   padding-left: $hmargin;
 }
+
+.categories-edit-form-admin{
+  @include flex-center;
+  justify-content: space-between;
+  margin-bottom: $vmargin * 2;
+}
