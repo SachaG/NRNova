@@ -1,5 +1,5 @@
-import Posts from 'meteor/nova:posts';
-import { getCategories } from './schema.js';
+import Posts from "meteor/nova:posts";
+import { getCategoriesAsOptions } from './schema.js';
 
 Posts.addField(
   {
@@ -15,7 +15,7 @@ Posts.addField(
         noselect: true,
         type: "bootstrap-category",
         order: 50,
-        options: formProps => getCategories(formProps.client),
+        options: formProps => getCategoriesAsOptions(formProps.client),
       },
       resolveAs: 'categories: [Category]'
     }
