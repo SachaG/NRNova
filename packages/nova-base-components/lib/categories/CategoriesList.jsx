@@ -9,15 +9,19 @@ import gql from 'graphql-tag';
 
 class CategoriesList extends Component {
 
-  render() {
-
+  getNestedCategories() {
     const categories = this.props.results;
-
-    const currentQuery = _.clone(this.props.router.location.query);
-    delete currentQuery.cat;
 
     const categoriesClone = _.map(categories, _.clone); // we don't want to modify the objects we got from props
     const nestedCategories = Utils.unflatten(categoriesClone, '_id', 'parentId');
+
+    return nestedCategories;
+  }
+
+  render() {
+
+    const currentQuery = _.clone(this.props.router.location.query);
+    const nestedCategories = this.getNestedCategories();
 
     return (
       <div>

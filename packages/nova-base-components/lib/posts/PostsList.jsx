@@ -18,18 +18,22 @@ const PostsList = (props) => {
     return (
       <div className="posts-list">
         {showHeader ? <Components.PostsListHeader/> : null}
-        <div className="posts-list-content">
-          {results.map(post => <Components.PostsItem post={post} key={post._id} currentUser={currentUser} />)}
+        <div className="posts-list-body">
+          <div className="posts-list-content">
+            {results.map(post => <Components.PostsItem post={post} key={post._id} currentUser={currentUser} />)}
+          </div>
+          {hasMore ? (loadingMore ? <Components.PostsLoading/> : <Components.PostsLoadMore loadMore={loadMore} count={count} totalCount={totalCount} />) : <Components.PostsNoMore/>}
         </div>
-        {hasMore ? (loadingMore ? <Components.PostsLoading/> : <Components.PostsLoadMore loadMore={loadMore} count={count} totalCount={totalCount} />) : <Components.PostsNoMore/>}
       </div>
     )
   } else if (loading) {
     return (
       <div className="posts-list">
         {showHeader ? <Components.PostsListHeader /> : null}
-        <div className="posts-list-content">
-          <Components.PostsLoading/>
+        <div className="posts-list-body">
+          <div className="posts-list-content">
+            <Components.PostsLoading/>
+          </div>
         </div>
       </div>
     )
@@ -37,8 +41,10 @@ const PostsList = (props) => {
     return (
       <div className="posts-list">
         {showHeader ? <Components.PostsListHeader /> : null}
-        <div className="posts-list-content">
-          <Components.PostsNoResults/>
+        <div className="posts-list-body">
+          <div className="posts-list-content">
+            <Components.PostsNoResults/>
+          </div>
         </div>
       </div>
     )  

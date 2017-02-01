@@ -10,13 +10,17 @@ Package.onUse(function (api) {
     'http',
     'static-html',
 
+    'fourseven:scss',
+
     'nova:core',
     'nova:posts',
     'nova:users',
     'nova:comments',
   ]);
 
-  api.addFiles("lib/head.html", "client");
+  // api.addFiles("lib/head.html", "client");
+
+  api.addFiles("lib/stylesheets/main.scss", "client");
 
   api.mainModule("lib/server.js", "server");
   api.mainModule("lib/client.js", "client");

@@ -12,7 +12,7 @@ class CategoriesNode extends Component {
   renderChildren(children) {
     return (
       <div className="categories-children">
-        {children.map(category => <CategoriesNode category={category} key={category._id} />)}
+        {children.map(category => <Components.CategoriesNode category={category} key={category._id} />)}
       </div>
     )
   }
