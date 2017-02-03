@@ -3,6 +3,7 @@ import React from 'react';
 import Posts from "meteor/nova:posts";
 import NrVideo from './NrVideo.jsx';
 import gql from 'graphql-tag';
+import { Link } from 'react-router';
 
 const NrPostsPage = props => {
  
@@ -20,7 +21,12 @@ const NrPostsPage = props => {
       <div className="posts-page">
         <Components.HeadTags url={Posts.getLink(post)} title={post.title} image={post.thumbnailUrl} />
         
-        <Components.PostsItem post={post} currentUser={props.currentUser} />
+        <h3 className="posts-item-title">
+          <Link to={Posts.getLink(post)} className="posts-item-title-link" target={Posts.getLinkTarget(post)}>
+            {post.title}
+          </Link>
+          <Components.PostsCategories post={post} />
+        </h3>
 
         {props.currentUser ? <NrVideo post={post}/> : 
           <div className="video-no-access">
@@ -31,7 +37,6 @@ const NrPostsPage = props => {
             pour avoir accès à la vidéo.
           </div>
         }
-        
 
         {post.htmlBody ? <div className="posts-page-body" dangerouslySetInnerHTML={htmlBody}></div> : null}
 
