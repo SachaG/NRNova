@@ -1,0 +1,18 @@
+.posts-item{
+  align-items: flex-start;
+}
+.posts-thumbnail{
+  img{
+    width: 180px;
+    height: auto;
+  }
+}
+.posts-item-title{
+  margin-bottom: 10px;
+}
+.posts-categories{
+  margin: 0;
+  .posts-category{
+    margin-bottom: 5px;
+  }
+}

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router';
 import { replaceComponent, getSetting, Components } from 'meteor/nova:core';
 
 const NrHeader = (props, context) => {
@@ -19,6 +20,10 @@ const NrHeader = (props, context) => {
         
         <div className="nav">
           
+          <div className="nav-links">
+            <a href="http://nrfight.com" target="_blank">Club</a>
+          </div>
+
           <div className="nav-user">
             {!!props.currentUser ? <Components.UsersMenu/> : <Components.UsersAccountMenu/>}
           </div>

@@ -18,7 +18,7 @@ Package.onUse(function (api) {
     'nova:comments',
   ]);
 
-  // api.addFiles("lib/head.html", "client");
+  api.addFiles("lib/head.html", "client");
 
   api.addFiles("lib/stylesheets/main.scss", "client");
 

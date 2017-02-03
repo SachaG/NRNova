@@ -17,9 +17,17 @@ const NrLayout = props =>
 
         <Components.Newsletter />
 
-        {/*<Components.NrSidebar />*/}
+        <div className="main-content">
+        
+          <Components.Sidebar />
 
-        {props.children}
+          <div className="center-content">
+
+            {props.children}
+
+          </div>
+
+        </div>
 
       </div>
     

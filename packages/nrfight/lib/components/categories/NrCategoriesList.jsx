@@ -1,22 +1,22 @@
-import { ModalTrigger, Components, replaceComponent, ShowIf, withList, Utils, getRawComponent } from "meteor/nova:core";
+import { ModalTrigger, Components, replaceComponent, getRawComponent } from "meteor/nova:core";
 import React, { PropTypes, Component } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { Button, DropdownButton, MenuItem, Modal } from 'react-bootstrap';
-import { LinkContainer } from 'react-router-bootstrap';
+import { Button } from 'react-bootstrap';
+import { Link } from 'react-router';
+import Categories from 'meteor/nova:categories';
 
 class NrCategoriesList extends getRawComponent('CategoriesList') {
 
   render() {
 
-    const currentQuery = _.clone(this.props.router.location.query);
     const nestedCategories = this.getNestedCategories();
 
     return (
       <div>
           <div className="category-menu-item dropdown-item">
-            <LinkContainer to={{pathname:"/", query: currentQuery}}>
+            <Link to={{pathname:"/"}}>
               <FormattedMessage id="categories.all"/>
-            </LinkContainer>
+            </Link>
           </div>
           {
             // categories data are loaded
@@ -29,7 +29,13 @@ class NrCategoriesList extends getRawComponent('CategoriesList') {
             // categories are loading
             : <Components.Loading />
           }
-
+          <Components.ShowIf check={Categories.options.mutations.new.check}>
+            <div className="categories-new-button category-menu-item dropdown-item">
+              <ModalTrigger title={<FormattedMessage id="categories.new"/>} component={<Button bsStyle="primary"><FormattedMessage id="categories.new"/></Button>}>
+                <Components.CategoriesNewForm/>
+              </ModalTrigger>
+            </div>
+          </Components.ShowIf>
       </div>
     )
 

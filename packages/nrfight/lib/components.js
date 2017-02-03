@@ -1,13 +1,18 @@
-// common
-import NrLayout from './components/common/NrLayout.jsx';
-import NrHeader from './components/common/NrHeader.jsx';
-import NrSidebar from './components/common/NrSidebar.jsx';
-
-// posts
-import NrPostsPage from './components/posts/NrPostsPage.jsx';
-import NrPostsItem from './components/posts/NrPostsItem.jsx';
-import NrPostsListHeader from './components/posts/NrPostsListHeader.jsx';
 
 // categories
-import NrCategoriesList from './components/categories/NrCategoriesList.jsx';
-import NrCategory from './components/categories/NrCategory.jsx';
+import './components/categories/NrCategoriesList.jsx';
+import './components/categories/NrCategory.jsx';
+
+// common
+import './components/common/NrHeader.jsx';
+import './components/common/NrLayout.jsx';
+import './components/common/NrSidebar.jsx';
+
+// posts
+import './components/posts/NrPostsHome.jsx';
+import './components/posts/NrPostsItem.jsx';
+import './components/posts/NrPostsListHeader.jsx';
+import './components/posts/NrPostsPage.jsx';
+import './components/posts/NrVideo.jsx';
+import './components/posts/NrVote.jsx';
+

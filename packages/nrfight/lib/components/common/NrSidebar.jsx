@@ -1,13 +1,16 @@
+import { Components, registerComponent } from 'meteor/nova:lib';
 import React from 'react';
-import { Components, registerComponent } from 'meteor/nova:core';
 
-const NrSidebar = props => {
-  
+const NrSidebar = () => {
+
   return (
-    <div className="sidebar">
-      <Components.CategoriesList />
+    <div className="sidebar posts-list-header">
+      <Components.SearchForm/>
+      <div className="posts-list-header-categories">
+        <Components.CategoriesList />
+      </div>
     </div>
   )
 }
 
-registerComponent('NrSidebar', NrSidebar);
+registerComponent('Sidebar', NrSidebar);
