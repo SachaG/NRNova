@@ -1,0 +1,45 @@
+.video-wrapper{
+  margin-bottom: $spacing;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #ddd;
+  padding: $spacing*2;
+  &.video-no-access{
+    position: relative;
+    box-shadow: inset 0px 0px 15px 0px rgba(0,0,0,0.15);
+  }
+}
+
+.video-thumbnail{
+  box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);
+  display: block;
+}
+
+.video-thumbnail{
+
+}
+
+.video-signup-message{
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: white;
+  >div{
+    width: 100%;
+    padding: $spacing;
+    background: rgba(0,0,0,0.7);
+  }
+  button{
+    margin-bottom: $spacing/2;
+  }
+  h5{
+    margin-bottom: 0;
+  }
+}

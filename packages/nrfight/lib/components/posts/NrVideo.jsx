@@ -1,11 +1,12 @@
 import React from 'react';
 import Video from 'react-videojs';
+import { registerComponent } from 'meteor/nova:core';
 
 const NrVideo = ({post}) => {
   return (
     <Video
       id={post._id}
-      className="video-js" 
+      className="video-wrapper video-js" 
       controls 
       preload="auto" 
       width="640"
@@ -19,4 +20,4 @@ const NrVideo = ({post}) => {
 
 NrVideo.displayName = "NrVideo";
 
-export default NrVideo;
+registerComponent('NrVideo', NrVideo);

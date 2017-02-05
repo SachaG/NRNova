@@ -5,6 +5,7 @@ import { MenuItem } from 'react-bootstrap';
 import { withRouter } from 'react-router'
 import Categories from 'meteor/nova:categories';
 import { Link } from 'react-router';
+import classNames from 'classnames';
 
 class NrCategory extends getRawComponent('Category') {
 
@@ -18,12 +19,15 @@ class NrCategory extends getRawComponent('Category') {
     newQuery.cat = category.slug;
 
     return (
-      <div className="category-menu-item dropdown-item">
-        <Link to={{pathname:"/", query: newQuery}}>
-          {currentCategorySlug === category.slug ? <Components.Icon name="voted"/> :  null}
-          {category.name}
-        </Link>
-        <Components.ShowIf check={Categories.options.mutations.edit.check} document={category}>{this.renderEdit()}</Components.ShowIf>
+      <div className={classNames('category-menu-item dropdown-item', {'category-menu-item-expanded': this.props.expanded})} onClick={this.props.toggleChildren}>
+        <div className="category-menu-item-left">
+          <Link className="category-menu-item-title" to={{pathname:"/", query: newQuery}}>
+            {currentCategorySlug === category.slug ? <Components.Icon name="voted"/> :  null}
+            {category.name}
+          </Link>
+          <Components.ShowIf check={Categories.options.mutations.edit.check} document={category}>{this.renderEdit()}</Components.ShowIf>
+        </div>
+        {this.props.hasChildren ? <a className="category-menu-expand">{this.props.expanded ? <Components.Icon name="collapse"/> : <Components.Icon name="expand"/>}</a> : null}
       </div>
     )
   }

@@ -45,9 +45,9 @@ class NrVote extends getRawComponent('Vote') {
       <div className={`like ${this.getActionClass()}`}>
         {this.props.currentUser ?
           likeIcon : 
-          <Components.ModalTrigger size="small" title="Please Log In" component={likeIcon}>
+          <Components.ModalTrigger size="small" title={this.context.intl.formatMessage({id: 'users.please_log_in'})} component={likeIcon}>
             <div className="log-in-message">
-              <h3>Sign Up / Log In</h3>
+              <h3><FormattedMessage id="users.log_in"/></h3>
               <Components.UsersAccountForm/>
             </div>
           </Components.ModalTrigger>

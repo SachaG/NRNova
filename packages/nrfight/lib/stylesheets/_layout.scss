@@ -1,0 +1,27 @@
+
+.wrapper{
+  background: #333;
+}
+.main{
+  margin: 0 auto;
+}
+.header-wrapper{
+  background: #111;
+}
+.main-content{
+  display: flex;
+  margin-bottom: $spacing;
+}
+.sidebar{
+  display: block;
+  width: 260px;
+}
+.center-content{
+  flex: 1;
+  background: white;
+  min-height: 100vh;
+}
+.footer{
+  padding: $spacing;
+  margin: 0 auto;
+}

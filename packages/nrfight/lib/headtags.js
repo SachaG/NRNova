@@ -1,5 +1,9 @@
-// import { Headtags } from 'meteor/nova:core';
+import { Headtags } from 'meteor/nova:core';
 
+Headtags.link.push({
+  href: 'https://fonts.googleapis.com/css?family=Chivo:400,400i,700',
+  rel: 'stylesheet'
+});
 
 // Headtags.script.push({
 //   src: "http://vjs.zencdn.net/5.10.7/video.js",

@@ -4,10 +4,12 @@ import React from 'react';
 const NrSidebar = () => {
 
   return (
-    <div className="sidebar posts-list-header">
-      <Components.SearchForm/>
-      <div className="posts-list-header-categories">
-        <Components.CategoriesList />
+    <div className="sidebar-wrapper">
+      <div className="sidebar posts-list-header">
+        <Components.SearchForm/>
+        <div className="posts-list-header-categories">
+          <Components.CategoriesList />
+        </div>
       </div>
     </div>
   )

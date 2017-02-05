@@ -1,14 +1,13 @@
-.main-content{
-  display: flex;
+.sidebar-wrapper{
+  padding: $spacing 0;
 }
 .sidebar{
-  display: block;
-  width: 260px;
-  margin-right: 20px;  
+  background: #ddd;
+  box-shadow: inset -5px 0px 10px 0px rgba(0,0,0,0.1);
+  height: 100%;
   .search-form{
+    padding: $spacing;
     width: 100%;
+    border-bottom: 1px solid rgba(0,0,0,0.2);
   }
-}
-.center-content{
-  
 }

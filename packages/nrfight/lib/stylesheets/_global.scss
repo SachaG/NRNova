@@ -1,0 +1,18 @@
+h1, h2, h3, h4, h5, h6, .btn{
+  @include secondary-font;
+  font-weight: bold;
+}
+
+.btn-primary{
+  background-color: $yellow;
+  border-color: $yellow;
+  color: #333;
+  &:hover, &:active, &:focus, &:active:focus{
+    background-color: $yellow;
+    border-color: $yellow;
+    color: #333;
+  }
+}
+
+a{
+}

@@ -1,5 +1,12 @@
-.posts-item{
-  align-items: flex-start;
+.posts-list{
+  .posts-item{
+    align-items: flex-start;
+    padding: $spacing;
+  }
+}
+.posts-list-content{
+  border-top: none;
+  margin-bottom: 0;
 }
 .posts-thumbnail{
   img{
@@ -15,4 +22,35 @@
   .posts-category{
     margin-bottom: 5px;
   }
+}
+
+.posts-page{
+  width: 100%;
+  background: white;
+  padding: 20px;
+  .posts-item-title{
+    font-size: 2.5rem;
+    margin-bottom: $spacing;
+  }
+}
+
+.posts-page-meta{
+  display: flex;
+  align-items: center;
+  .vote{
+    margin-right: $spacing/2;
+  }
+}
+
+.posts-load-more{
+  background: $yellow;
+  border-radius: 0;
+  border: none;
+  @include secondary-font;
+  font-weight: bold;
+}
+
+.posts-no-more{
+  text-align: center;
+  padding: $spacing;
 }

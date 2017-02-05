@@ -5,7 +5,7 @@ class CategoriesNode extends Component {
 
   renderCategory(category) {
     return (
-      <Components.Category category={category} key={category._id} openModal={this.props.openModal} />
+      <Components.Category category={category} key={category._id} />
     )
   }
 

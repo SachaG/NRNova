@@ -15,8 +15,6 @@ const NrLayout = props =>
 
         <Components.FlashMessages />
 
-        <Components.Newsletter />
-
         <div className="main-content">
         
           <Components.Sidebar />
@@ -29,8 +27,11 @@ const NrLayout = props =>
 
         </div>
 
+        <Components.Newsletter />
+
       </div>
     
+
       <Components.Footer {...props}/>
     
     </div>
